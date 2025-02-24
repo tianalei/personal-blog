@@ -30,12 +30,40 @@
 /** toc **/
 .toc {
     font-size: small;
-    margin: 0 0.2em 1em;
+    margin-bottom: 1rem;
     border: 1px solid var(--border);
     background: var(--code-bg);
     border-radius: var(--radius);
     padding: .1em;
 }
+.toc .inner {
+    margin: 5px 5px 1em;
+    padding: 0 10px;
+    opacity: .9;
+    }
+.toc details summary {
+    margin-inline-start: 0;
+}
+.toc ul {
+    padding-left: 0.8rem;
+}
+
+/** tag filter **/
+.tag-filter {
+    font-size: small;
+    margin: 1em 0;
+    border-radius: var(--radius);
+}
+.tag-filter .terms-tags li {
+    display: inline-block;
+    margin: 2px 4px;  /* 调整为更紧凑的间距（上下4px，左右6px） */
+}
+
+.tag-filter .terms-tags a {
+    margin: 0;         /* 移除标签内部间距 */
+    padding: 4px 8px;  /* 保持原有内边距 */
+}
+
 
 /*********** Code Block ***********/
 
@@ -130,14 +158,15 @@ summary {
     cursor: pointer;
     list-style: none;
     padding: 8px 12px;
-    background-color: #f5f5f5;
+    background-color: var(--code-bg);
     border-radius: 4px;
     transition: background-color 0.2s;
-  }
+    color: var(--content);
+}
   summary:hover {
-    background-color: #e0e0e0;
-  }
-  summary {
+    background-color: var(--border);
+}
+summary {
     cursor: pointer;
     list-style: none; 
     padding: 8px 12px 8px 35px; 

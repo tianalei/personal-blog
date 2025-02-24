@@ -1,5 +1,9 @@
 a {
-    color: black;
+    color: var(--content);
+}
+a:hover {
+    color: var(--content);
+    text-decoration: none;
 }
 #moon {
     color: black;
@@ -8,7 +12,7 @@ a {
 
 
 h2 {
-    color: black;
+    color: var(--content);
     font-weight: 700;
     padding: 1rem;
 }
@@ -27,10 +31,10 @@ h2 {
 
 /* Featured Article */
 .featured-article {
-    background-color: #ffffff;
+    background-color: var(--entry);
     display: flex;
     align-items: center;
-    padding: 1rem;
+    padding: 0;
     border-radius: 1rem;
     overflow: hidden;
 }
@@ -49,7 +53,7 @@ h2 {
 
 .featured-image img {
     width: 100%;
-    height: auto;
+    height: 400px;
     display: block;
     border-radius: 1rem;
 }
@@ -76,19 +80,19 @@ h2.featured-title  {
 }
 
 .featured-title a {
-    color: #000;
+    color: var(--content);
     text-decoration: none;
 }
 
 .featured-date {
     font-size: 0.9rem;
-    color: #666;
-    margin-bottom: 1rem;
+    color: var(--content);
+    margin-bottom: 0.6rem;
 }
 
 .featured-description {
     font-size: 1rem;
-    color: #333;
+    color: var(--content);
     line-height: 1.5;
 }
 
@@ -124,14 +128,29 @@ h2.featured-title  {
 
 .row {
     margin: 0.1em;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+    margin-top: 0.5rem;
+    width: 100%;
 }
 
-/* 容器布局 */
-.gadgets-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
+@media (min-width: 850px) {
+    .row {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 850px) and (min-width: 450px) {
+    .row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 450px) {
+    .row {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* 卡片样式 */
@@ -187,6 +206,12 @@ h2.featured-title  {
     font-size: 0.95rem;
     line-height: 1.5;
     margin-bottom: 1rem;
+}
+.gadget-date {
+    color: var(--secondary);
+    font-size: 0.8rem;
+    line-height: 1;
+    margin-bottom: 0.7rem;
 }
 
 /* 元信息 */
