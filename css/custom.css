@@ -6,6 +6,10 @@
 
     --insite-link-color: #ed1f9bc5;
     --external-link-color: #13287ac5;
+    
+    --content-font-size: 0.85em;
+
+    --list-padding-inline-start: 1.75em;
 }
 
 .main{
@@ -13,14 +17,16 @@
 }
 /*Font*/
 .post-content {
-    font-size: 0.85em;  /* 整体字体大小(默认1em=16px) */
-    line-height: 1.6rem;  /* 保持合适的行高 */
+    font-size: var(--content-font-size);  /* 整体字体大小(默认1em=16px) */
+    line-height: 1.75rem;  /* 保持合适的行高 */
     hyphens: auto;
 }
 .post-content p{
     text-align: justify;
     -webkit-hyphens: auto;
     font-kerning: normal;
+    margin-top: 0.6rem;
+    margin-bottom: 0;
 }
 .post-title {
     margin-bottom: 1rem;
@@ -28,11 +34,21 @@
 }
 .post-content h1{
     font-size: 1.4em;
+    margin: 2rem auto 1rem;
 }
 .post-content h2{
     font-size: 1.2em;
     margin: 1.3em auto 0.8em;
 }
+
+.post-content h3{
+    font-size: 1.1em;
+}
+
+.post-content h4{
+    font-size: 1em;
+}
+
 .post-content code {
     font-size: 0.7em; 
 }
@@ -48,14 +64,15 @@
 }
 .toc .inner {
     margin: 5px 5px 1em;
-    padding: 0 10px;
+    padding: 0 1.5em;
     opacity: .9;
     }
 .toc details summary {
     margin-inline-start: 0;
 }
+
 .toc ul {
-    padding-left: 0.8rem;
+    padding-left: 0;  
 }
 
 /** tag filter **/
@@ -82,7 +99,7 @@
     padding-top: 2.5rem;  /* Extra space for title bar */
     background: var(--code-block-bg);
     border-radius: 0.5rem;
-    margin: 1.5rem 0;
+    margin: 0.75rem 0;
 }
 
 /* Window controls container */
@@ -145,7 +162,7 @@
 /** Numbering **/
 
 .post-content {
-    counter-reset: figure-counter;
+    counter-reset: figure-counter table-counter;
 }
 
 .numbered-figure figcaption::before {
@@ -156,6 +173,7 @@
 .post-content figure > figcaption {
     color: #666 !important;
     margin-top: 0.1em;
+    margin-bottom: 0.5rem;
     font-weight: 400;
     text-align: center;
     opacity: 0.7;
@@ -163,10 +181,14 @@
     font-family: var(--ref-font-family);
 }
 
+.post-content figure {
+    margin-bottom: 0rem !important;
+}
+
 /* defaul link */
 .post-content a:hover {
     color: var(--external-link-color);
-    font-size: 1.05em;
+    font-size: 1.01em;
 }
 
 /** Table and Caption **/
@@ -176,9 +198,6 @@
     max-width: 100%;
 }
 
-.post-content {
-    counter-reset: table-counter;
-  }
 
 .table-caption::before {
     counter-increment: table-counter;
@@ -245,7 +264,7 @@
 
 .post-content table img:hover {
     position: relative; 
-    transform: scale(3); /* 适度放大 */
+    transform: scale(3); /* 这里无论设置为什么，都会基于js来确定其scale大小 */
     z-index: 999;
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
@@ -285,24 +304,48 @@ details[open] summary::before {
     content: "▼"; 
 }
 
+/* Add background color for open details */
+details[open] {
+    background-color: var(--code-bg);
+    border-radius: 4px;
+    margin: 4px 0;
+}
+
+/* Adjust content size and spacing within details */
+.post-content details[open] {
+    font-size: 0.95em;  /* Slightly smaller font size */
+}
+
+.post-content details[open] pre,
+.post-content details[open] blockquote {
+    margin: 0.5rem 0 !important;
+}
+
 /* Modify list spacing and indentation */
 .post-content ul,
 .post-content ol {
-    font-size: 0.95em;
     line-height: 1.4;
-    padding-inline-start: 30px;  /* Increase from 20px */
-    margin-bottom: 0.8rem;       /* Reduce vertical spacing between lists */
+    padding-inline-start: var(--list-padding-inline-start);  /* Increase from 20px */
+    margin-bottom: 0.1rem;  
 }
 .post-content li {
     margin-top: 3px;            /* Reduce line spacing between list items */
     margin-bottom: 3px;
+    line-height: 1.75;
+}
+.post-content li ol {
+    padding-inline-start: var(--list-padding-inline-start);
     line-height: 1.4;
 }
-.post-content li ul,
-.post-content li ol {
-    padding-inline-start: 30px;
-    font-size: 0.95em;     /* 二级列表为父级的95% */
-    line-height: 1.35;
+
+/* Hide bullet points for li elements containing checkboxes */
+.post-content li:has(input[type="checkbox"]) {
+    list-style-type: none;
+}
+
+/* Adjust checkbox alignment after removing bullet point */
+.post-content li input[type="checkbox"] {
+    margin-left: -1.2em; /* Adjust this value to align checkbox with text */
 }
 
 /* --------------------------------- badges --------------------------------- */
@@ -400,3 +443,51 @@ details[open] summary::before {
   .language-Scala .badge-message { background-color: #c22d40; color: #fff; }
   .language-Elixir .badge-message { background-color: #6e4a7e; color: #fff; }
   .language-Haskell .badge-message { background-color: #5e5086; color: #fff; }
+
+/* Mermaid Diagram Styling */
+.post-content pre.mermaid {
+    background: #ffffff !important;
+    padding: 1rem !important;
+    border-radius: 0.5rem;
+    margin: 1.5rem 0;
+}
+
+.post-content pre.mermaid::before,
+.post-content pre.mermaid::after {
+    display: none !important;
+}
+
+.post-content pre.mermaid svg {
+    background: #ffffff;
+}
+
+/* Changelog Style */
+
+
+
+.changelog p {
+    margin-top: 1.75rem;
+    font-size: var(--content-font-size);
+    font-weight: 400;
+    line-height: 1.25em;
+    font-family: "IBM Plex Sans", "Inter", "Segoe UI", "Helvetica Neue", -apple-system, sans-serif;
+}
+
+.update {
+    color: #3c6dd9;
+    display: inline-block;
+    margin-bottom: 0.5em;
+}
+
+.update a {
+    color: #3c6dd9;
+    text-decoration: underline;
+}
+
+.update a:hover {
+    opacity: 0.8;
+}
+
+/* Cover Image/Animation */
+
+
